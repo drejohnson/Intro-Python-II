@@ -55,28 +55,31 @@ room['treasure'].s_to = room['narrow']
 # player object
 p1 = Player("John Snow", room["outside"])
 
-for k, v in room.items():
-    wrapper = textwrap.TextWrapper(width=50) 
-    name = k
-    description = v 
-    print(name)
-    print(description)
+def confirm_quit(confirm):
+    if (confirm == "y"):
+        print("Thanks for playing. Bye!")
+        exit()
+    elif confirm == "N":
+        pass
+    elif len(confirm) == 0:
+        pass
+    else:
+        print("Choices are [y] or [N]. Please try again\n")
 
-print(f"player: {p1.name} {p1.current_room}")
+def player_move(player, direction):
+    next_room = getattr(player.current_room, f"{direction}_to")
+    if next_room is not None:
+        player.current_room = next_room
+        print("You're on to the next room, Good luck")
+    else:
+        print("Oh no, you hit a dead-end. Try again!")
 
-# def confirm_quit(confirm):
-#     if (confirm == "y"):
-#         print("Thanks for playing. Bye!")
-#         exit()
-#     elif confirm == "N":
-#         pass
-#     elif len(confirm) == 0:
-#         pass
-#     else:
-#         print("Choices are [y] or [N]. Please try again\n")
-
-# while True:
-#     cmd = input("[n] North [e] East [s] South [w] West [q] Quit\n")
-#     if cmd == "q":
-#         confirm = input("Are you sure you want to quit? [yN]\n")
-#         confirm_quit(confirm)
+while True:
+    print(f"Your current room: {p1.current_room.name}")
+    print(f"Room description: {p1.current_room.description}")
+    cmd = input("[n] North [e] East [s] South [w] West [q] Quit\n")
+    if cmd == "q":
+        confirm = input("Are you sure you want to quit? [yN]\n")
+        confirm_quit(confirm)
+    if cmd in ["n", "e", "s", "w"]:
+        player_move(p1, cmd)
