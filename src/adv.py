@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+import textwrap
 
 # Declare all the rooms
 
@@ -49,3 +51,32 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+# player object
+p1 = Player("John Snow", room["outside"])
+
+for k, v in room.items():
+    wrapper = textwrap.TextWrapper(width=50) 
+    name = k
+    description = v 
+    print(name)
+    print(description)
+
+print(f"player: {p1.name} {p1.current_room}")
+
+# def confirm_quit(confirm):
+#     if (confirm == "y"):
+#         print("Thanks for playing. Bye!")
+#         exit()
+#     elif confirm == "N":
+#         pass
+#     elif len(confirm) == 0:
+#         pass
+#     else:
+#         print("Choices are [y] or [N]. Please try again\n")
+
+# while True:
+#     cmd = input("[n] North [e] East [s] South [w] West [q] Quit\n")
+#     if cmd == "q":
+#         confirm = input("Are you sure you want to quit? [yN]\n")
+#         confirm_quit(confirm)
