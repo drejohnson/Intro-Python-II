@@ -2,9 +2,12 @@
 # currently.
 
 class Player():
-    def __init__(self, name, current_room):
+    def __init__(self, name, current_room, inventory):
         self.name = name
         self.current_room = current_room
+        self.inventory = inventory
+    # def __str__(self):
+        # return f"Current room: {self.current_room}"
     def travel(self, direction):
         next_room = getattr(self.current_room, f"{direction}_to")
         if next_room is not None:
